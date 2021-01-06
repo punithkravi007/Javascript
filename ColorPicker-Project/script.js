@@ -4,8 +4,21 @@ var black = document.querySelector(".black");
 var orange = document.querySelector(".orange");
 var blue = document.querySelector(".blue");
 
-const displaySelectedColor = (selectedElement) => {
+var color_selected_div = document.querySelector(".selected-color"); 
+
+
+const getBGColor = (selectedElement) => {
     return window.getComputedStyle(selectedElement).backgroundColor;
 }
 
-console.log(displaySelectedColor(red));
+const magicColorChanger = (selectedElement) => {
+    selectedElement.addEventListener("click", () => {
+        color_selected_div.style.backgroundColor = getBGColor(selectedElement)
+    });
+}
+
+magicColorChanger(red);
+magicColorChanger(blue);
+magicColorChanger(black);
+magicColorChanger(pink);
+magicColorChanger(orange);
