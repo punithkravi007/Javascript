@@ -1,0 +1,37 @@
+.container{
+    margin: 100px;
+}
+
+.color{
+    margin: 1px;
+}
+
+.red{
+    background-color: red;
+    height: 20px;
+    width: 50px;
+}
+.blue{
+    background-color:blue;
+    height: 20px;
+    width: 50px;
+}
+.black{
+    background-color:black;
+    height: 20px;
+    width: 50px;
+}
+.orange{
+    background-color:orange;
+    height: 20px;
+    width: 50px;
+}
+.pink{
+    background-color: pink;
+    height: 20px;
+    width: 50px;
+}
+
+.selected-color-dv{
+    margin-top: 50px;
+}
