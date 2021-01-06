@@ -6,4 +6,4 @@ console.log(numbers.every((e) => e % 2 === 0));
 console.log(numbers.filter((num) => num >6 ));
 
 console.log(numbers.slice(0,2))
-console.log(numbers.spl)
+console.log(numbers.splice(2,3,"New Entry"))
