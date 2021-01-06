@@ -1,4 +1,4 @@
-//TODO: (e) => e % 2 === 0) is a callback function
+//TODO: (e) => e % 2 === 0 is a callback function
 
 var numbers = new Array(2, 4, 6, 9, 10);
 console.log(numbers.every((e) => e % 2 === 0));
