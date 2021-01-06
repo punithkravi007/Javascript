@@ -7,6 +7,10 @@ var User = function(firstName, lastName, age){
     this.age = age;
 }
 
+User.prototype.getFirstName = function(){
+    console.log(`Your First Name is : ${this.firstName}`);
+}
+
 function aboutUser(city, state){
     this.about = `${this.firstName} ${this.lastName} aged ${this.age} years lives in ${city}, ${state}`
 }
@@ -21,3 +25,4 @@ users.forEach( user => {
 });
 
 console.table(users);
+console.log(user_1.getFirstName());
