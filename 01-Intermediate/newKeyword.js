@@ -7,6 +7,7 @@ var User = function(firstName, lastName, age){
     this.age = age;
 }
 
+//TODO: prototyping the function getFirstName() to the User Object. 
 User.prototype.getFirstName = function(){
     console.log(`Your First Name is : ${this.firstName}`);
 }
@@ -21,6 +22,7 @@ var user_3 = new User("Pooja", "KR", 26);
 var users = new Array(user_1, user_2, user_3);
 
 users.forEach( user => {
+    //TODO: call() associates the function to the user object.
     aboutUser.call(user, "Davangere", "Karnataka");
 });
 
