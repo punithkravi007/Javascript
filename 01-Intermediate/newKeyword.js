@@ -25,4 +25,6 @@ users.forEach( user => {
 });
 
 console.table(users);
-console.log(user_1.getFirstName());
+if(user_1.hasOwnProperty("firstName")){
+    console.log(user_1.getFirstName());
+}
