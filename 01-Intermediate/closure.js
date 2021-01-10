@@ -33,7 +33,7 @@ function doMultiplication(num1){
 
 console.log(doMultiplication(10)(5));
 
-//TODO: CLOSURE-03 :
+//TODO: CLOSURE-03 : Using CURRYING Way
 const doDivision = (num1) => {
     return (num2) => num1 / num2;
 }
