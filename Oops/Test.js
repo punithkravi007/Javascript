@@ -47,5 +47,5 @@ function calculateTotalAmountSpent() {
 calculateTotalAmountSpent.call(user_1);
 calculateTotalAmountSpent.call(user_2);
 
-console.log(user_1);
-console.log(user_2);
+console.log(user_1.firstName);
+console.log(user_2.lastName);
