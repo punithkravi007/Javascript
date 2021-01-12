@@ -1,16 +1,14 @@
 // import User from './User';
 
-const User = require('./UserModel.js');
-const Course = require('./CourseModel.js');
-
+const User = require("./UserModel.js");
+const Course = require("./CourseModel.js");
 
 //TODO: Courses
 reactCourse = new Course("React Js", 100);
 angularCourse = new Course("Angular", 150);
 javaCourse = new Course("Java", 200);
-nodeCourse = new Course("Node Js",180);
+nodeCourse = new Course("Node Js", 180);
 pythonCourse = new Course("Python", 160);
-
 
 const user_1 = new User("Punith", "KR", "Punith.kr@intimetec.com");
 //TODO: Enrolling to the course
@@ -39,12 +37,11 @@ user_2.deleteCourse("Java");
 console.log(user_1.getUserInfo());
 console.log(user_2.getUserInfo());
 
-
-function calculateTotalAmountSpent(){
-    this.totalAmountSpent = 0;
-    this.courseList.forEach( c => {
-        this.totalAmountSpent += c.price; 
-    });
+function calculateTotalAmountSpent() {
+  this.totalAmountSpent = 0;
+  this.courseList.forEach((c) => {
+    this.totalAmountSpent += c.price;
+  });
 }
 
 calculateTotalAmountSpent.call(user_1);
