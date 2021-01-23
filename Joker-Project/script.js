@@ -13,7 +13,7 @@
       .catch((err) => {
         console.log(err);
       });
-  }, 1000);
+  }, 2000);
 })();
 
 const createJoke = (jokeData) => {
