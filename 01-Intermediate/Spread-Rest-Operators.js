@@ -21,6 +21,7 @@ console.log(sumOfTwoNumbers(...arr));
 //---------------------------------------------------------------------------------------------------------------
 
 const sumN = (...args) => {
+    console.log(args);
     let sum = 0;
     args.forEach((arg) => sum += arg)
     return sum;
@@ -30,8 +31,7 @@ console.log(sumN(1,2,3,4,5,6));
 
 const multiplyAndSum = (num1, num2, ...args) => {
     let multiple = num1 * num2;
-    let sum = 0;
-    args.forEach(e => sum += parseInt(e));
+    let sum = sumN(...args);
     return [multiple, sum];
 }
 
