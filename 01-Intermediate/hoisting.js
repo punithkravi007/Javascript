@@ -3,15 +3,18 @@
 //TODO: 2. All Variables are scanned and made undefined.
 //TODO: ------ Javascript Hoisting -------
 
+
 console.log(hotelName);
-var hotelName = "Eat and Pack";
+var hotelName = "Chetana Hotel"
 console.log(hotelName);
-var tipper = function(amount){
+function tipper(amount){
+    let hotelName = "Eat and Pack";
+    console.log(hotelName);
     console.log(`
-        Hotel Name   : ${hotelName},
-        Bill Amount  : ${amount},
-        Total Amount : ${amount+10}
+    Hotel Name   : ${hotelName},
+    Bill Amount  : ${amount},
+    Total Amount : ${amount+10}
     `);
 }
+tipper(100);
 
-tipper(100)

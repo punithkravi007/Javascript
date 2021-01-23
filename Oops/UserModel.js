@@ -34,7 +34,7 @@ class User {
       });
       if (!isCourseExist) this.courseList.push(course);
       else
-        console.log(
+        console.error(
           `Hey, ${this.firstName} ${this.lastName}, you are trying to add ${course.courseName} again.`
         );
     } else this.courseList.push(course);

@@ -1,6 +1,6 @@
 // import User from './User';
 
-const User = require("./UserModel.js");
+const {User} = require("./UserModel.js");
 const Course = require("./CourseModel.js");
 
 //TODO: Courses
@@ -47,5 +47,3 @@ function calculateTotalAmountSpent() {
 calculateTotalAmountSpent.call(user_1);
 calculateTotalAmountSpent.call(user_2);
 
-console.log(user_1.firstName);
-console.log(user_2.lastName);
