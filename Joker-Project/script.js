@@ -11,30 +11,32 @@
         createJoke(data);
       })
       .catch((err) => {
-        console.log(err);
+        console.log("ERROR : ",err);
       });
   }, 2000);
 })();
 
 const createJoke = (jokeData) => {
   
-  var category = jokeData.length > 0 ? jokeData.categories[0] : "Unknown";
+  var jokeCategory = jokeData.length > 0 ? jokeData.categories[0] : "Unknown";
   var jokesDiv = document.getElementsByClassName("list-group")[0];
 
   var aTag = document.createElement("a");
   aTag.classList.add("list-group-item");
 
-  var categoryHeader = document.createElement("h4");
-  categoryHeader.classList.add("list-group-item-heading");
-  var categoryText = document.createTextNode(`Catergory : ${category}`);
+  var header = document.createElement("h4");
+  header.classList.add("list-group-item-heading");
+  var categoryText = document.createTextNode(`Catergory : ${jokeCategory}`);
 
   var createdDateSpan = document.createElement("span");
   createdDateSpan.classList.add("created-date");
   var createdDateText = document.createTextNode(`Created Date :  ${jokeData.created_at}`);
 
   createdDateSpan.appendChild(createdDateText);
-  categoryHeader.appendChild(categoryText);
-  categoryHeader.appendChild(createdDateSpan);
+  header.appendChild(categoryText);
+  header.appendChild(createdDateSpan);
+
+  var horizontalLine = document.createElement("hr");
 
   var jokediv = document.createElement("p");
   jokediv.classList.add("list-group-item-text");
@@ -66,7 +68,8 @@ const createJoke = (jokeData) => {
 
   jokediv.appendChild(rowDiv);
 
-  aTag.appendChild(categoryHeader);
+  aTag.appendChild(header);
+  aTag.appendChild(horizontalLine);
   aTag.appendChild(jokediv);
   jokesDiv.appendChild(aTag);
 };

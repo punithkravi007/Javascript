@@ -2,3 +2,7 @@
     float: right;
     font-size: small;
 }
+.list-group-item-heading{
+    background-color: beige;
+    padding: 20px;
+}
