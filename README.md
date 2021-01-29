@@ -1,3 +1,3 @@
-# Javascript :
+# Javascript Concepts with EXamples and Projects:
 
-Find some Intermediate javascript concepts and projects 
+Here you can find the advance javascript concepts and 
