@@ -15,16 +15,24 @@
   <body>
     <div class="container" style="padding: 100px">
       <div class="row">
-        <div class="col-sm-12" id="browseButton">
-          <div class="form-group files">
-            <input type="file" class="form-control" multiple="" />
+        <div class="large-12 columns">
+          <p class="lead">Select files to upload</p>
+          <input type="file" id="inFile">
+          <button class="inverse small" id="browseButton">+ Add Files</button>
+          <button class="danger small" id="uploadFiles">Start Upload</button>
+          <div class="alert-box alert" data-nothingToUpload>
+            Error Nothing To Upload, Please Add Some Files
           </div>
+          <div id="dragHere" class="panel drop-zone">Drag &amp; Drop Here</div>
+          <div id="results" class="panel"></div>
+          Status:
+          <div class="alert-box secondary"></div>
         </div>
       </div>
-      <button id="uploadFiles">Start Upload</button>
-      <div id="results" class="panel"></div>Status:
     </div>
     <script src="Resumable.js"></script>
-    <script src="script.js"></script>
+    <script src="spark-md5.js"></script>
+    <!-- <script src="script.js"></script> -->
+    <script src="readLines.js"></script>
   </body>
 </html>

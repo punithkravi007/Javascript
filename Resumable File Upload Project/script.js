@@ -1,12 +1,12 @@
 (function () {
   var r = new Resumable({
-    target: "/resumable_upload",
+    target: "http://localhost:5000/resumable_upload",
     query: {},
     maxChunkRetries: 2,
     maxFiles: 3,
     prioritizeFirstAndLastChunk: true,
-    simultaneousUploads: 4,
-    chunkSize: 1 * 1024 * 1024,
+    simultaneousUploads: 1,
+    chunkSize: 5 * 1024 * 1024,
   });
   var results = $("#results"),
     draggable = $("#dragHere"),
@@ -14,31 +14,75 @@
     browseButton = $("#browseButton"),
     nothingToUpload = $("[data-nothingToUpload]");
 
-  // if resumable is not supported aka IE
   if (!r.support) location.href = "http://browsehappy.com/";
 
   r.assignBrowse(browseButton);
   r.assignDrop(draggable);
 
-  r.on("fileAdded", function (file, event) {
-      console.log(file);
-    var template =
-      '<div data-uniqueid="' +
-      file.uniqueIdentifier +
-      '">' +
-      '<div class="fileName">' +
-      file.fileName +
-      " (" +
-      file.file.type +
-      ")" +
-      "</div>" +
-      '<div class="large-6 right deleteFile">X</div>' +
-      '<div class="progress large-6">' +
-      '<span class="meter" style="width:0%;"></span>' +
-      "</div>" +
-      "</div>";
+  r.on("fileAdded", function computeHashes(resumableFile, offset, fileReader) {
+    var chunkSize = resumableFile.resumableObj.opts.chunkSize;
+    var numChunks = Math.max(
+      Math.floor(resumableFile.file.size / chunkSize),
+      1
+    );
+    var forceChunkSize = resumableFile.getOpt("forceChunkSize");
+    var startByte, endByte;
+    var hasher = new SparkMD5();
+    var func = resumableFile.file.slice
+      ? "slice"
+      : resumableFile.file.mozSlice
+      ? "mozSlice"
+      : resumableFile.file.webkitSlice
+      ? "webkitSlice"
+      : "slice";
+    var bytes;
 
-    results.append(template);
+    resumableFile.hashes = resumableFile.hashes || [];
+    fileReader = fileReader || new FileReader();
+    offset = (typeof offset == 'object') ? 0 : offset;
+
+    startByte = offset * chunkSize;
+    endByte = Math.min(resumableFile.file.size, (offset + 1) * chunkSize);
+
+    if (resumableFile.file.size - endByte < chunkSize && !forceChunkSize) {
+      endByte = resumableFile.file.size;
+    }
+    bytes = resumableFile.file[func](startByte, endByte);
+
+    fileReader.onloadend = function (e) {
+      var spark = SparkMD5.ArrayBuffer.hash(e.target.result);
+       
+      resumableFile.hashes.push(spark);
+      console.log(resumableFile);
+      if (numChunks > offset + 1) {
+        computeHashes(resumableFile, offset + 1, fileReader);
+      }
+      if (numChunks == offset + 1) {
+        r.upload();
+      }
+      offset = numChunks-1
+      resumableFile.resumableObj.opts.query = offset
+    };
+
+    fileReader.readAsArrayBuffer(bytes);
+
+    // Show progress pabr
+    $(".resumable-progress, .resumable-list").show();
+    // Show pause, hide resume
+    $(".resumable-progress .progress-resume-link").hide();
+    $(".resumable-progress .progress-pause-link").show();
+    // Add the file to the list
+    $(".resumable-list").append(
+      '<li class="resumable-file-' +
+        resumableFile.uniqueIdentifier +
+        '">Uploading <span class="resumable-file-name"></span> <span class="resumable-file-progress"></span>'
+    );
+    $(
+      ".resumable-file-" +
+        resumableFile.uniqueIdentifier +
+        " .resumable-file-name"
+    ).html(resumableFile.fileName);
+    // Actually start the upload
   });
 
   uploadFile.on("click", function () {

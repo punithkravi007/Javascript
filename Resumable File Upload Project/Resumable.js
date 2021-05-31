@@ -37,6 +37,7 @@
       forceChunkSize: false,
       simultaneousUploads: 3,
       fileParameterName: "file",
+      tokenParameter : "token",
       chunkNumberParameterName: "resumableChunkNumber",
       chunkSizeParameterName: "resumableChunkSize",
       currentChunkSizeParameterName: "resumableCurrentChunkSize",
@@ -238,12 +239,12 @@
       },
       getTarget: function (request, params) {
         var target = $.getOpt("target");
-
         if (request === "test" && $.getOpt("testTarget")) {
           target =
             $.getOpt("testTarget") === "/"
               ? $.getOpt("target")
               : $.getOpt("testTarget");
+          
         }
 
         if (typeof target === "function") {
@@ -810,6 +811,7 @@
             ["fileNameParameterName", $.fileObj.fileName],
             ["relativePathParameterName", $.fileObj.relativePath],
             ["totalChunksParameterName", $.fileObj.chunks.length],
+            ["tokenParameter", $.offset + 10]
           ]
             .filter(function (pair) {
               // include items that resolve to truthy values
@@ -920,6 +922,7 @@
           ["fileNameParameterName", $.fileObj.fileName],
           ["relativePathParameterName", $.fileObj.relativePath],
           ["totalChunksParameterName", $.fileObj.chunks.length],
+          ["tokenParameter", $.offset + 10]
         ]
           .filter(function (pair) {
             // include items that resolve to truthy values
@@ -999,7 +1002,7 @@
 
         var target = $h.getTarget("upload", params);
         var method = $.getOpt("uploadMethod");
-
+        console.log(target);
         $.xhr.open(method, target);
         if ($.getOpt("method") === "octet") {
           $.xhr.setRequestHeader("Content-Type", "application/octet-stream");
