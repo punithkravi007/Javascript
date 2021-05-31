@@ -28,9 +28,9 @@ function aboutUser(city, state, country){
 
 //TODO: Call  : This is avaiable in all the functions and is use to borrow the function into the objects.
 //TODO: Apply : This is similar to call but arguments are passed to function as array of elements as shown below
-users.forEach(element => {
-    calculateAge.call(element, "2021");
-    aboutUser.apply(element, ["Davangere", "Karnataka", "India"]);
+users.forEach(user => {
+    calculateAge.call(user, "2021");
+    aboutUser.apply(user, ["Davangere", "Karnataka", "India"]);
 });
 console.table(users);
 
